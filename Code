@@ -1,0 +1,73 @@
+
+
+#include <IRremote.h>
+
+const byte IR_RECEIVE_PIN = 2;
+//MOTOR1 PINS
+int ena = 5;
+int in1 = 6;
+int in2 = 7;
+int in3 = 8;
+int in4 = 9;
+int enb = 10;
+
+int MotorFoward = //input ir sensor code 
+ 
+void setup()
+{
+   Serial.begin(115200);
+   Serial.println("IR Receive test");
+   IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK);
+
+   pinMode(ena, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(enb, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+
+}
+
+void loop()
+{
+   if (IrReceiver.decode())
+   {
+      String ir_code = String(IrReceiver.decodedIRData.command, HEX);
+      Serial.println(ir_code);
+
+      
+
+    
+{
+      if(ir_code == "MotorFoward")
+
+       //CLOCKWISE MAX SPEED
+  digitalWrite(7,HIGH);
+  digitalWrite(6,LOW);
+  analogWrite(ena, 255);
+
+  
+  digitalWrite(9,HIGH);
+  digitalWrite(8,LOW);
+  analogWrite(enb, 255);
+  
+  delay(2000);
+
+  
+
+  //STOP
+  digitalWrite(in1,LOW);
+  digitalWrite(in2,LOW);
+
+
+  digitalWrite(in3,LOW);
+  digitalWrite(in4,LOW);
+  delay(2000); 
+
+  
+}
+
+  
+      IrReceiver.resume();
+   }
+}
